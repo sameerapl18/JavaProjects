@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <head>
+        <title>Registration Confirmation</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="scripts/stylesheet.css"></link>
+        <!-- For Bootstrap - Start -->
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <!-- For Bootstrap - End -->
+    </head>
+    <body>
+        <h:form id="form">
+            <div class="mainContainer">
+                <div class="headerDiv">
+                    <header>
+                        <ui:insert name ="header"> 
+                            <ui:include src="header.xhtml"/>
+                        </ui:insert>
+                    </header>
+                </div>
+                <div id="contentBody" class="contentBody" style="text-align: center">
+                    <div>
+                        <h2>
+                            #{userRegistration.register()}
+                        </h2>
+                    </div>
+                    <p>
+                        <h:commandButton id="return" value="Back to Login" class="btn btn-primary"
+                                         action="login.xhtml"/>
+                    </p>
+                </div>
+                <div class="footerDiv">               
+                    <footer>
+                        <ui:insert name ="footer"> 
+                            <ui:include src="footer.xhtml"/>
+                        </ui:insert>
+                    </footer>
+                </div>
+            </div>
+        </h:form>
+    </body>
+</html>

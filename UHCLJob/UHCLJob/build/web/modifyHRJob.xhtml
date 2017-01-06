@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <head>
+        <title>All Jobs - HR Account - Modify Job</title>
+        <meta http-equiv="cache-control" content="no-cache" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta http-equiv="refresh"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="scripts/stylesheet.css"></link>
+          <script src="scripts/Validations.js"></script>
+        <!-- For Bootstrap - Start -->
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <!-- For Bootstrap - End -->
+    </head>
+    <body>
+        <h:form id="modifyJobForm" class="form">
+            <div class="mainContainer">
+                <div class="headerDiv">
+                    <header>
+                        <ui:insert name ="header"> 
+                            <ui:include src="header.xhtml"/>
+                        </ui:insert>
+                    </header>
+                </div>
+                <div id="contentBody" class="contentBody">
+                     <h:commandLink id = "alljobs" value = "Home"  action = "#{login.login()}"></h:commandLink>
+                         &#xA0;&#xA0;
+                    <h:commandLink id="logout" value="Log Out" action ="#{login.logout()}"></h:commandLink><br></br>
+                    <h3> Welcome  <h:outputText value="${login.userID}"/>!!</h3>
+
+                    <h4><font color="blue">Modify Job details</font></h4>
+
+                    <h:inputHidden id="jobID" value="${hRPage.jobID}"/>
+                    <table align="center">
+                        <tr>
+                            <td width="50%" align="left">
+                                <b><i> Job Title</i></b>
+                            </td>
+                            <td align="right">
+                                <h:inputText id="jobTile" value="${hRPage.jobTitle}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="50%" align="left">
+                                <b><i>Job Description</i></b>
+                            </td>
+                            <td align="left">
+                                <h:inputTextarea id="jobbDescription" value="${hRPage.jobbDescription}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="50%" align="left">
+                                <b><i> No of Vacancies</i></b>
+                            </td>
+                            <td align="right">
+                                <h:inputText id="vacancies" value="${hRPage.vacancies}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="50%" align="left">
+                                <b><i> Job Status</i></b>
+                            </td>
+                            <td align="center">
+                                <h:selectOneRadio class="myRadioRegClass" id="jobStatus" value="#{hRPage.jobStatus}">
+                                    <f:selectItem id="open" itemLabel="open" itemValue="open"/>
+                                    <f:selectItem id="close" itemLabel="close" itemValue ="close"/>
+                                </h:selectOneRadio>
+                            </td>
+                        </tr>
+                    </table>            
+                    <br></br>  <br></br>  <br></br>      
+                     
+                    <h:commandButton id="submitModify" value="Modify Job" class="btn btn-primary"
+                                    onclick="return validateModifyJob();" action="#{hRPage.submitModify()}" style="margin-right: 10px"></h:commandButton>
+                    <h:commandButton id="back" value="Back" class="btn btn-primary"
+                                     action="#{hRPage.getAllJobsHR()}"></h:commandButton>
+                </div>
+                <div class="footerDiv">               
+                    <footer>
+                        <ui:insert name ="footer"> 
+                            <ui:include src="footer.xhtml"/>
+                        </ui:insert>
+                    </footer>
+                </div>
+            </div>
+        </h:form>
+    </body>
+</html>

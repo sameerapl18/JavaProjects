@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <head>
+        <title>New Job - HR Account</title>
+        <meta http-equiv="cache-control" content="no-cache" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta http-equiv="refresh"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="scripts/stylesheet.css"></link>
+        <script src="scripts/Validations.js"></script>
+        <!-- For Bootstrap - Start -->
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <!-- For Bootstrap - End -->
+    </head>
+    <body>
+        <h:form id="newJobForm" class="form">
+            <div class="mainContainer">
+                <div class="headerDiv">
+                    <header name ="header"> 
+                        <ui:include src="header.xhtml"/>
+                    </header>
+                </div>
+
+                <div id="contentBody" class="contentBody">
+                    <section class="rightBar">
+                        <img class="newJobsImage" style="width: 800px; height: 400px; margin-right: 60px" src="images/newJobs.jpg"></img>
+                    </section>   
+                    <section>
+                        <h3> Welcome  <h:outputText value="${login.userID}"/>!!</h3>
+                        <h:commandLink id = "alljobs" value = "Home"  action = "#{login.login()}"></h:commandLink>
+                         &#xA0;&#xA0;
+                    <h:commandLink id="logout" value="Log Out" action ="#{login.logout()}"></h:commandLink><br/><br/>
+                        <h4><font color="blue">Add new job details</font></h4>
+                        <table id="tb2">
+                            <tr>
+                                <td width="50%">
+                                    <b><i> Job Title</i></b>
+                                </td>
+                                <td>
+                                    <h:inputText id="jobTitle" value="#{jobsApplication.jobTitle}"></h:inputText>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="50%">
+                                    <b><i>  Job Description</i></b>
+                                </td>
+                                <td>
+                                    <h:inputTextarea id ="jobDesc" value="#{jobsApplication.jobDescription}"></h:inputTextarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="50%">
+                                    <b><i>  Total number of vacancies</i></b>
+                                      
+                                </td>
+                                <td>
+                                    <h:inputText id="vacancies" value="#{jobsApplication.vacancies}"></h:inputText>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="50%">
+                                    <b><i>  Job Status</i></b>
+                                </td>
+                                <td>                                    
+                                    <h:selectOneRadio class="myRadioRegClass" id="jobStatus" value="#{jobsApplication.jobStatus}">
+                                        <f:selectItem id="open" class="radio-inline" itemLabel="open" itemValue="open"/>
+                                        <f:selectItem id="close" class="radio-inline" itemLabel="close" itemValue ="close"/>
+                                    </h:selectOneRadio>
+                                </td>
+                            </tr>
+                        </table>
+                        <h:commandButton id="submit" value="Add Job" class="btn btn-primary" style="margin-right: 10px"
+                                         onclick="return validateNewJob();" action="#{jobsApplication.addNewJob()}"/>
+                        <h:commandButton id="back" value="Back" class="btn btn-primary"
+                                         action="#{hRPage.getAllJobsHR()}"/>
+                    </section>                 
+                </div>
+                <div class="footerDiv">
+                    <footer name ="footer"> 
+                        <ui:include src="footer.xhtml"/>
+                    </footer>
+                </div>
+            </div>
+        </h:form>
+    </body>
+</html>

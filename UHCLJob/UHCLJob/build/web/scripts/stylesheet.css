@@ -1,0 +1,135 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 16, 2015, 9:15:30 PM
+    Author     : kurlas8625
+*/
+body{
+    
+    
+}
+
+tr{
+    align:left;
+    
+}
+
+.header
+{
+    width: 100%;
+    height: 56px;
+    float: top;
+    background:#F7D358;
+}
+
+.footerDiv
+{
+        background:#F3E2A9;
+	width:100%;
+	height:90px;
+	position:absolute;
+	bottom:0;        
+}
+.contentBody{
+        height: 100%;
+        //width: 50%;
+        padding-bottom: 200px;
+        padding-left: 5px;
+       // float: left;
+}
+.mainContent
+{
+        padding-left: 5px;
+        padding-right: 200px;
+        float: right;   
+}
+.mainContainer{
+	min-height:100%;
+        width:100%;
+	position:absolute;
+}
+
+table{
+    align:center;
+      border-collapse: collapse;
+    
+}
+
+
+td {
+    align:left;
+    padding-top: 10px;
+}
+
+.myRadioClass td{
+    
+    width: 80px; 
+}
+
+.dataStudent{
+    color: green;
+    font-style: oblique;
+    font-weight: bold;
+}
+
+.myRadioRegClass td{
+    
+    width: 70px; 
+}
+
+
+/*.header, .mainContent, .leftBar, .rightBar, .footer {
+    flex: 1 100%;
+}
+.mainContent { flex: 2 0px; }
+
+.leftBar { order: 1; }
+.mainContent    { order: 2; }
+.rightBar { order: 3; }
+.footer  { order: 4; }*/
+
+/* added by Sarath- Start */
+.form, #form
+{
+    margin: 0px 5px;
+    padding: 0px 0px;
+    //alignment-adjust: central;
+}
+#logout
+{
+    float: right;
+}
+
+.error{
+    color:red;
+    
+}
+
+.loginImage
+{
+    height: 100%;
+    width: 50%;
+    float: left;
+}
+.newJobsImage
+{
+    height: 200px;
+    width: 60%;
+    float: right;
+    padding-bottom: 10px;
+    //padding-right: 40px;
+}
+
+#tb1 tr
+{
+    padding-bottom:  1em;
+    
+}
+
+#tr1, #tb2{
+    text-align: left;
+}
+/* added by Sarath- End */

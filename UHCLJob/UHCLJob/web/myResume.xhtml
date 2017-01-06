@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html lang ="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <head>
+        <title>My Resume</title>
+        <meta http-equiv="cache-control" content="no-cache" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta http-equiv="refresh"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="scripts/stylesheet.css"></link>
+        <script src="scripts/Validations.js"></script>
+        <!-- For Bootstrap - Start -->
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <!-- For Bootstrap - End -->
+    </head> 
+    <body>
+        <h:form id="myForm" class="form">
+            <div class="mainContainer">
+                <div class="headerDiv">
+                    <header>
+                        <ui:insert name ="header"> 
+                            <ui:include src="header.xhtml"/>
+                        </ui:insert>
+                    </header>
+                </div>
+                <div id="contentBody" class="contentBody">
+                    
+                    <h:commandLink 
+                        id = "home" value = "Home"  action = "#{login.login()}">
+                    </h:commandLink> &#xA0;&#xA0;
+                    <h:commandLink id="logout" value="Log Out" action ="#{login.logout()}"></h:commandLink> <br></br>
+
+                    
+                    <h3> Welcome  <h:outputText value="${login.userID}"/>!!</h3>
+                    <h3><font color="blue">My Resume</font></h3>        
+
+                    <h5>**Please enter your details</h5>
+                    <div style="alignment-adjust: middle">
+                    <table align="center"  border-collapse="collapse">
+                        <tr>
+                            <td width="30%">
+                                Full Name
+                            </td>
+                            <td width="70%" align="left">
+                                <h:inputText id="name" 
+                                             value="${studentDetails.name}"/>
+                            </td>
+                        </tr>
+                        <tr padding-top="40px">
+                            <td width="30%" >
+                                Gender
+                            </td>
+                            <td width="70%" align="left">
+                                <h:selectOneRadio class="myRadioClass" id="gender"  value="${studentDetails.gender}">
+                                    <f:selectItem id="female"  itemLabel="Female" itemValue="Female" />
+                                    
+                                    <f:selectItem id="male" itemLabel="Male" itemValue ="Male"/>
+                                </h:selectOneRadio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Contact Number
+                            </td>
+                            <td align="left">
+                                <h:inputText id="contactNo" 
+                                             value="#{studentDetails.contactNo}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Email Id
+                            </td>
+                            <td align="left">
+                                <h:inputText id="emailID" 
+                                             value="#{studentDetails.emailID}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Highest Degree
+                            </td>
+                            <td align="left">
+                                <h:selectOneMenu id="highestDegree" value="#{studentDetails.highestDegree}">
+                                    <f:selectItem id="master" itemLabel="Masters" itemValue="master"/>
+                                    <f:selectItem id="undergrad" itemLabel="Under Graduation" itemValue="Under Graduation"/>
+                                    <f:selectItem id="phd" itemLabel="Phd" itemValue="Phd"/>
+                                    <f:selectItem id="other" itemLabel="Other" itemValue="Other"/>
+                                </h:selectOneMenu>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Skills
+                            </td>
+                            <td align="left">
+                                <h:inputText id="skills" 
+                                             value="#{studentDetails.skills}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="10%">
+                                Experience
+                            </td>
+                            <td width="90%" align="right">
+                                <h:inputText id="experience" 
+                                             value="#{studentDetails.experience}"/> (in number of years)
+                            </td>
+                        </tr>
+                    </table>
+                        </div>
+                    <br></br>
+                    <h:commandButton id="resume" class="btn btn-primary" value="Update" 
+                                     onclick="return validateResume();" style="margin-right: 10px"
+                                     action ="#{studentDetails.updateResume(login.userID)}"></h:commandButton>
+                    <h:commandButton id="back" value="Back" class="btn btn-primary"
+                                     action="${login.login()}"></h:commandButton><br></br>
+                </div>
+                <div class="footerDiv">               
+                    <footer>
+                        <ui:insert name ="footer"> 
+                            <ui:include src="footer.xhtml"/>
+                        </ui:insert>
+                    </footer>
+                </div>
+            </div>
+        </h:form>
+    </body>
+</html>

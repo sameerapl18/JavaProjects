@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <head>
+        <title>Job Applications - Student</title>
+        <meta http-equiv="cache-control" content="no-cache" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta http-equiv="refresh"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="scripts/stylesheet.css"></link>
+        <!-- For Bootstrap - Start -->
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <!-- For Bootstrap - End -->
+    </head>
+    <body>
+        <h:form id="form">
+            <div class="mainContainer">
+                <div class="headerDiv">
+                    <header>
+                        <ui:insert name ="header"> 
+                            <ui:include src="header.xhtml"/>
+                        </ui:insert>
+                    </header>
+                </div>
+                <div id="contentBody" class="contentBody">
+                      <h:commandLink id = "alljobs" value = "Home"  action = "#{login.login()}"></h:commandLink>
+                         &#xA0;&#xA0;
+                    <h:commandLink id="logout" value="Log Out" action ="#{login.logout()}"></h:commandLink><br></br>
+                    <h3> Welcome  <h:outputText value="${login.userID}"/>!!</h3>
+                    <h4><font color="blue"><h:outputText value="${appliedJobs.jobTitle}"/></font></h4><br/>
+                    
+                    <c:if test="#{empty appliedJobs.students}">
+                        <h5>**No students applied yet to this job</h5>
+                    </c:if>
+
+                    <c:if test="#{not empty appliedJobs.students}">
+                        
+                        <i><b> Total Vacancies :</b></i> <b><font color="green"> <h:outputText value ="${appliedJobs.totalVacancies}"/></font></b> &#xA0;&#xA0; &#xA0;&#xA0;
+                        <i><b>Total Applied :</b></i> <b><font color="green"> <h:outputText value ="${appliedJobs.totalApplied}"/></font></b> &#xA0;&#xA0; &#xA0;&#xA0;
+                        <i><b> Selected Count by you : </b></i> <b><font color="green"><h:outputText value ="${appliedJobs.selectedCount}"/></font></b>
+                        <br></br>  <br></br>  <br></br>
+                        <table class="table table-striped">
+                            <tr class="success">
+                                <th>StudentName</th>
+                                <th>Application Status</th>
+                            </tr>
+                            <c:forEach items="${appliedJobs.students}" var="item">
+
+                                <tr align="left">
+                                    <c:if test="#{appliedJobs.showPostResult}">
+                                        <c:if test="#{item.studentStatus eq 'true'}">
+                            
+                             <td>  <h:outputText value="${item.studentName}"/></td>
+                             </c:if>
+                            <c:if test="#{item.studentStatus eq 'false'}">
+                            
+                            <td><h:commandLink id = "studentname" value = "${item.studentName}"  action = "${studentApplication.getStudentApplication(item.studentID, appliedJobs.jobID)}"></h:commandLink></td>
+                            </c:if>
+ 
+                                    </c:if>
+                                    <c:if test="#{appliedJobs.showPostResult ne true}">
+
+                                        <td>  <h:outputText value="${item.studentName}"/></td>
+                                    </c:if>
+                                    <td>  <h:outputText value="${item.studentStaus_HR}"/></td>
+                                </tr>
+                            </c:forEach> 
+                        </table>
+                        <br></br>
+
+                    </c:if>
+                    <c:if test="#{appliedJobs.showPostResult}">
+                        <h:commandButton id="submitbutton_final" value="Post Final Result" 
+                                         class="btn btn-primary" style="margin-right: 4px"
+                                         action="#{updateApplication.notifyStudents(appliedJobs.jobID)}"></h:commandButton>
+                    </c:if>
+                    <h:commandButton id="submitbutton_back" value="Go Back" class="btn btn-primary"
+                                     action="#{login.login()}"></h:commandButton>
+
+                </div>
+                <div class="footerDiv">               
+                    <footer>
+                        <ui:insert name ="footer"> 
+                            <ui:include src="footer.xhtml"/>
+                        </ui:insert>
+                    </footer>
+                </div>
+            </div>
+        </h:form>
+    </body>
+</html>

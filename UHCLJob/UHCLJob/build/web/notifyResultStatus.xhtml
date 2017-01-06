@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <head>
+        <title>Notify Application Status</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="scripts/stylesheet.css"></link>
+        <!-- For Bootstrap - Start -->
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <!-- For Bootstrap - End -->
+    </head>
+    <body>
+        <h:form id="form">
+            <div class="mainContainer">
+                <div class="headerDiv">
+                    <header>
+                        <ui:insert name ="header"> 
+                            <ui:include src="header.xhtml"/>
+                        </ui:insert>
+                    </header>
+                </div>
+                <div class="mainContent">
+                    <h:commandLink id="logout" value="Log Out" action ="#{login.logout()}"></h:commandLink>
+                    <br/><br/>
+                    <h3> Welcome  <h:outputText value="${login.userID}"/>!!</h3>
+                    <br/><br/>
+                    <div style="text-align: center">
+                        <div>
+                            <br></br><br></br><br></br>
+                            <c:if test="#{updateApplication.status}">
+                                <h3>The Job status are successfully updated to students</h3>
+                            </c:if>
+                            <br></br>
+                            <h:commandButton id="submitbutton_accept" value="Go Back" class="btn btn-primary"
+                                             action="#{login.login()}"></h:commandButton>
+                        </div>
+                    </div>
+                </div>
+                <div class="footerDiv">               
+                    <footer>
+                        <ui:insert name ="footer"> 
+                            <ui:include src="footer.xhtml"/>
+                        </ui:insert>
+                    </footer>
+                </div>
+            </div>
+        </h:form>
+    </body>
+</html>

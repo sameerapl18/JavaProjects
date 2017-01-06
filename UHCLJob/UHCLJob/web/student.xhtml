@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"    
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <head>
+        <title>Welcome to Student Account</title>
+        <meta http-equiv="cache-control" content="no-cache" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta http-equiv="refresh"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="scripts/stylesheet.css"></link>
+        <!-- For Bootstrap - Start -->
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <!-- For Bootstrap - End -->
+    </head>
+    <body>
+        <h:form id="form">        
+            <div class="mainContainer">
+                <div class="headerDiv">
+                    <header>
+                        <ui:insert name ="header"> 
+                            <ui:include src="header.xhtml"/>
+                        </ui:insert>
+                    </header>
+                </div>
+                <div id="contentBody" class="contentBody">
+                    <h:commandLink 
+                        id = "alljobs" value = "My Resume"  action = "#{studentDetails.getStudentDetails(login.userID)}">
+                    </h:commandLink> &nbsp; &nbsp;
+                    <h:commandLink 
+                        id = "myjobs" value = "My Applied Jobs"  action = "#{jobsApplication.studAppliedJobs(login.userID)}">
+                    </h:commandLink> &nbsp; &nbsp;
+                    <h:commandLink id="logout" value="Log Out" action ="#{login.logout()}"></h:commandLink> <br></br>
+
+                    <h3>Welcome  <h:outputText value="${login.userID}"/>!!</h3>
+
+                    <h3>List of open jobs you have applied</h3>
+                    <c:if test="#{empty login.listJobs}">
+                        <h4>**There is no open job. Please come back to check later on!</h4>
+                    </c:if>
+
+                    <c:if test="#{not empty login.listJobs}">
+
+                        <table class="table table-striped">
+                            <tr class="success">
+                                <th>Job Title</th>
+                                <th>Status</th>
+                            </tr>
+
+                            <c:forEach items="#{login.listJobs}" var="item">
+
+                                <tr align="left">                   
+                                    <td>  
+                                        <h:commandLink id = "jobTitle" value = "${item.jobTitle}"  
+                                                       action = "${jobsApplication.getJobDetails(item.jobID,item.jobStatus,login.userID)}">
+                                        </h:commandLink>                    
+                                    </td>
+
+                                    <td>
+                                        ${item.jobStatus}
+                                    </td>
+                                </tr>
+
+                            </c:forEach>
+                        </table>
+                    </c:if>
+                </div>
+                <div class="footerDiv">               
+                    <footer>
+                        <ui:insert name ="footer"> 
+                            <ui:include src="footer.xhtml"/>
+                        </ui:insert>
+                    </footer>
+                </div>
+            </div>
+        </h:form>
+    </body>
+</html>

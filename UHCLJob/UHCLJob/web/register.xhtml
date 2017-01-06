@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Registration</title>
+        <meta http-equiv="cache-control" content="no-cache" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta http-equiv="refresh"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="scripts/stylesheet.css"></link>
+        <script src="scripts/Validations.js"></script>
+        <!-- For Bootstrap - Start -->
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <!-- For Bootstrap - End -->
+    </h:head>
+    <h:body>
+        <h:form id="registerForm" class="form">
+            <div class="mainContainer">
+                <div class="headerDiv">
+                    <header>
+                        <ui:insert name ="header"> 
+                            <ui:include src="header.xhtml"/>
+                        </ui:insert>
+                    </header>
+                </div>
+                <div id="contentBody" class="contentBody">
+                    <h3>Register a new account</h3>
+                    <table align="center" id="tb2">
+                        <tr>
+                            <td width="50%">
+                                Name
+                            </td>
+                            <td align="right">
+                                <h:inputText id="userName" title="Please enter your name "
+                                             value="#{userRegistration.userName}">
+                                </h:inputText>   
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                User ID
+                            </td>
+                            <td align="right">
+                                <h:inputText id ="userID" title="Please choose your user ID: "
+                                             value="#{userRegistration.userID}">
+                                </h:inputText>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Password
+                            </td>
+                            <td align="right">
+                                <h:inputText id="psw" title="Please choose your password: "
+                                             value="#{userRegistration.password}">
+                                </h:inputText>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Account Type
+                            </td>
+                            <td alignt="right">
+                                <h:selectOneRadio class="myRadioRegClass"  id="type" value="#{userRegistration.type}">
+                                    <f:selectItem id="HR" itemLabel="HR" itemValue="HR"/>
+                                    <f:selectItem id="Student" itemLabel="Student" itemValue ="Student"/>
+                                </h:selectOneRadio>
+                            </td>
+                        </tr>
+                         </table>
+                        <br/><br/><br/>
+                       
+                                <h:commandButton id="submit" value="Submit" onclick="return validateRegister();" class="btn btn-primary"
+                                     action="#{userRegistration.register()}" style="margin-left: 150px"/>
+                            
+                                <h:commandButton id="cancel" value="Cancel" class="btn btn-primary"
+                                     style="margin-left: 5px"  action="login.xhtml"/>
+                          
+                   
+                </div>
+                <div class="footerDiv">               
+                    <footer>
+                        <ui:insert name ="footer"> 
+                            <ui:include src="footer.xhtml"/>
+                        </ui:insert>
+                    </footer>
+                </div>
+            </div>
+        </h:form>
+    </h:body>
+</html>

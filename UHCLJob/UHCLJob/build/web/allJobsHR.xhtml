@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      >
+    <head>
+        <title>All Jobs - HR Account</title>
+        <meta http-equiv="cache-control" content="no-cache" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta http-equiv="refresh"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="scripts/stylesheet.css"></link>
+        <!-- For Bootstrap - Start -->
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <!-- For Bootstrap - End -->
+    </head>
+    <body>
+        <h:form id="form">
+            <div class="mainContainer">
+                <div class="headerDiv">
+                    <header>
+                        <ui:insert name ="header"> 
+                            <ui:include src="header.xhtml"/>
+                        </ui:insert>
+                    </header>
+
+                </div>
+                <div id="contentBody" class="contentBody">
+                    <h:commandLink id="logout" value="Log Out" action ="#{login.logout()}"></h:commandLink><br></br>
+
+                   <h3> Welcome  <h:outputText value="${login.userID}"/>!!</h3>
+                    <h:commandLink id = "alljobs" value = "Home"  action = "#{login.login()}"></h:commandLink>
+                    <br/>
+                    <br/>
+                    <h:commandLink id="newjob" value="Create a New Job" action ="newJobHR.xhtml"></h:commandLink><br></br>
+
+                    <h3><b>List of Job Applications</b></h3>
+                    <c:if test="#{empty hRPage.jobs}">
+                        <h4>**No jobs yet. Please click on New Job to add a new Job</h4>
+                    </c:if>
+
+                    <c:if test="#{not empty hRPage.jobs}">
+                        <table class="table table-striped" id="tb2">
+                            <tr class="success">
+                                <th>Job Title</th>
+                                <th>Status</th>
+                                <th>Vacancies</th>
+                                <th>Modify Job</th>                        
+                            </tr>
+                            <c:forEach items="#{hRPage.jobs}" var="item">
+                                <tr>
+                                    <td><h:outputText value="${item.jobTitle}"/></td>       
+                                    <td><h:outputText value="${item.jobStatus}"/></td>
+                                    <td><h:outputText value="${item.vacancies}"/></td>
+                                    <td>
+                                        <h:commandLink id = "jobID" value = "edit"  action = "#{hRPage.modifyJob(item.jobID,item.jobDate,item.jobDescription,item.jobStatus,item.jobTitle,
+                                                                                                item.vacancies)}"></h:commandLink>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                    </c:if>
+
+                </div>
+                <div class="footerDiv">               
+                    <footer>
+                        <ui:insert name ="footer"> 
+                            <ui:include src="footer.xhtml"/>
+                        </ui:insert>
+                    </footer>
+                </div>
+            </div>
+        </h:form>
+    </body>
+</html>

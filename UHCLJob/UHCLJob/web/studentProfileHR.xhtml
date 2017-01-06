@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <head>
+        <title>Registration Confirmation</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="scripts/stylesheet.css"></link>
+        <!-- For Bootstrap - Start -->
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <!-- For Bootstrap - End -->
+    </head>
+    <body>
+        <h:form id="form">
+            <div class="mainContainer">
+                <div class="headerDiv">
+                    <header>
+                        <ui:insert name ="header"> 
+                            <ui:include src="header.xhtml"/>
+                        </ui:insert>
+                    </header>
+                </div>
+                <div id="contentBody" class="contentBody">
+                     <h:commandLink 
+                        id = "home" value = "Home"  action = "#{login.login()}">
+                    </h:commandLink> &#xA0;&#xA0;
+                    <h:commandLink id="logout" value="Log Out" action ="#{login.logout()}"></h:commandLink><br></br>
+                      <h3>Welcome  <h:outputText value="#{login.userID}"/>!! </h3><br/><br/>
+                    <c:if test="#{empty studentApplication.student}">
+                        <h4>**Error</h4>
+                    </c:if>
+                    <c:if test="#{not empty studentApplication.student}">
+                        <table align="center">
+                            <tr><td align="left" width="50%">Name: </td><td align="right"><font class="dataStudent"><h:outputText value="${studentApplication.student.name}"/></font></td></tr>
+                            <tr><td align="left"  width="50%">Gender: </td><td align="right"><font class="dataStudent"><h:outputText value="${studentApplication.student.gender}"/></font></td></tr>
+                            <tr><td align="left"  width="50%">Contact Number : </td><td align="right"><font class="dataStudent"><h:outputText value="${studentApplication.student.contactNo}"/></font></td></tr>
+                            <tr><td align="left"  width="50%">Email Id : </td><td align="right"><font class="dataStudent"><h:outputText value="${studentApplication.student.emailID}"/></font></td></tr>
+                            <tr><td align="left"  width="50%">Highest Degree:  </td><td align="right"><font class="dataStudent"><h:outputText value="${studentApplication.student.highestDegree}"/></font></td></tr>
+                            <tr><td align="left"  width="50%">skills: </td><td align="right"><font class="dataStudent"><h:outputText value="${studentApplication.student.skills}"/></font></td></tr>
+                            <tr><td align="left"  width="50%">Experience:  </td><td align="right"><font class="dataStudent"><h:outputText value="${studentApplication.student.experience}"/></font></td></tr>
+                        </table>
+                        <br></br>
+                        <c:if test="#{studentApplication.student.showSelect}">
+                            <h:commandButton id="submitbutton_accept" value="Select Applicant" 
+                                             class="btn btn-primary" style="margin-right: 4px"
+                                             action="#{updateApplication.select(studentApplication.student.studentID, studentApplication.jobId)}"></h:commandButton>
+                        </c:if>
+                        
+                        <h:commandButton id="submitbutton_reject" value="Reject Applicant" 
+                                         class="btn btn-primary" style="margin-right: 4px"
+                                         action="#{updateApplication.reject(studentApplication.student.studentID, studentApplication.jobId)}"></h:commandButton>
+                        <h:commandButton id="submitbutton_back" value="Go Back" class="btn btn-primary"
+                                         action="#{appliedJobs.appliedJob(studentApplication.jobId)}"></h:commandButton>
+                        <br></br><br></br><br></br>
+                        
+                        <c:if test="#{studentApplication.student.showSelect  ne true}">
+                           <font class="error"> <h:outputText value="**You have already selected the required Applicants"></h:outputText>
+                           </font>                        </c:if>
+                        
+                    </c:if>
+                </div>
+                <div class="footerDiv">               
+                    <footer>
+                        <ui:insert name ="footer"> 
+                            <ui:include src="footer.xhtml"/>
+                        </ui:insert>
+                    </footer>
+                </div>
+            </div>
+        </h:form>
+    </body>
+</html>

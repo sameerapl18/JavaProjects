@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      >
+    <h:head>
+        <title>Login</title>
+        <meta http-equiv="cache-control" content="no-cache" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta http-equiv="refresh"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <script type="text/javascript" src="scripts/Validations.js"></script>
+        <link rel="stylesheet" type="text/css" href="scripts/stylesheet.css"></link>
+       
+        <!-- For Bootstrap - Start -->
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+        <scripts>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+         </scripts>
+        <!-- For Bootstrap - End -->
+    </h:head>
+    <h:body>
+
+
+        <h:form id="loginForm" class="form">        
+
+            <div class="mainContainer">
+                <div class="headerDiv">
+                    <header>
+                        <ui:insert name ="header"> 
+                            <ui:include src="header.xhtml"/>
+                        </ui:insert>
+                    </header>
+
+                </div>
+                <div id="contentBody" class="contentBody">
+                    <section class="leftBar">
+                        <br/><img class="loginImage" src="images/login.jpg"></img>                    
+                    </section>
+                    <section class="mainContent">
+                        <h4><font color="blue"> Login to your account</font></h4>
+                        <table align="center">
+                            <tr>
+                                <td width="50%">
+                                    <b>User ID </b>
+                                </td>                                
+                                <td align="right">
+                                    <h:inputText id ="userID" 
+                                                 title="Please enter your ID"
+                                                 value="#{login.userID}"/>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td width="50%">
+                                    <b>Password </b>
+                                </td>
+                                <td align="right">
+                                    <h:inputSecret id ="psw" 
+                                                 title="Please enter your password"
+                                                 value="#{login.password}"/> 
+                                </td>
+                            </tr>
+                            </table>
+                        <br/>
+                        <h:commandButton id="submit" value="Submit" onclick="return validateLogin()" class="btn btn-primary"
+                                                     action="#{login.login()}" style="margin-left: 80px"/>
+                        <h:commandButton id="reset" value="Reset" class="btn btn-primary" immediate="true"
+                                                     action="login.xhtml" style="margin-left: 10px"/>    
+                        <br/><br/> 
+                       &#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; <h:commandLink id = "signup" value = "New User? Sign-up here"  action = "register.xhtml"></h:commandLink>
+                    </section>         
+                </div>
+                <div class="footerDiv">               
+                    <footer>
+                        <ui:insert name ="footer"> 
+                            <ui:include src="footer.xhtml"/>
+                        </ui:insert>
+                    </footer>
+                </div>
+            </div>
+        </h:form>
+    </h:body>
+</html>
